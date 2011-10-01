@@ -1,0 +1,9 @@
+# Copyright (c) 2011 Daniel Tralamazza
+# See the file LICENSE.txt for licensing information.
+   
+content   mailminer                 chrome/content/
+skin      mailminer   classic/1.0   chrome/skin/
+locale    mailminer   en-US         chrome/locale/en-US/
+resource  mailminer                 modules/
+
+overlay chrome://messenger/content/messenger.xul chrome://mailminer/content/overlay.xul

@@ -1,0 +1,17 @@
+<!ENTITY prefwindow.title "Mail Miner preferences">
+
+<!ENTITY paneGeneral.title "General preferences">
+<!ENTITY overwriteFilled.label "Overwrite address book data">
+<!ENTITY overwriteFilled.accesskey "O">
+<!ENTITY autoInsert.label "Automatically add incoming e-mail addresses">
+<!ENTITY autoInsert.accesskey "A">
+
+<!ENTITY paneRapleaf.title "Rapleaf preferences">
+<!ENTITY rapleaf.key.label "Rapleaf API key">
+<!ENTITY rapleaf.key.accesskey "R">
+
+<!ENTITY paneQwerly.title "Qwerly preferences">
+<!ENTITY qwerly.key.label "Qwerly API key">
+<!ENTITY qwerly.key.accesskey "Q">
+<!ENTITY qwerly.cps.label "Qwerly calls per second">
+<!ENTITY qwerly.cps.accesskey "C">

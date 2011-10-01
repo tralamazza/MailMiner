@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://mailminer/locale/options.dtd">
+<prefwindow id="mailminer-preferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;">
+  <script type="application/javascript" src="chrome://mailminer/content/options.js"/>
+  
+  <!-- GENERAL -->
+  <prefpane id="paneGeneral" label="&paneGeneral.title;">
+    <preferences>
+      <preference id="overwriteFilled" name="extensions.mailminer.overwriteFilled" type="bool"/>
+      <preference id="autoInsert" name="extensions.mailminer.autoInsert" type="bool"/>
+    </preferences>
+
+    <vbox>
+      <checkbox disabled="true" id="ovewriteFilled.checkbox" preference="overwriteFilled" label="&overwriteFilled.label;" accesskey="&overwriteFilled.accesskey;"/>
+      <hbox>
+        <checkbox id="autoInsert.checkbox" preference="autoInsert" label="&autoInsert.label;" accesskey="&autoInsert.accesskey;"/>
+        <menulist id="addrbook.menulist" oncommand="onCommand(event)">
+          <menupopup>
+          </menupopup>
+        </menulist>
+      </hbox>
+    </vbox>
+  </prefpane>
+
+  <!-- RAPLEAF -->
+  <prefpane id="paneRapleaf" label="&paneRapleaf.title;" image="chrome://mailminer/skin/rapleaf.jpg">
+    <preferences>
+      <preference id="rapleaf.key" name="extensions.mailminer.rapleaf.key" type="string"/>
+    </preferences>
+
+    <label accesskey="&rapleaf.key.accesskey;" control="rapleaf.key.textbox">&rapleaf.key.label;</label><textbox id="rapleaf.key.textbox" preference="rapleaf.key"/>
+  </prefpane>
+
+  <!-- QWERLY -->
+  <prefpane id="paneQwerly" label="&paneQwerly.title;" image="chrome://mailminer/skin/qwerly.jpg">
+    <preferences>
+      <preference id="qwerly.key" name="extensions.mailminer.qwerly.key" type="string"/>
+      <preference id="qwerly.cps" name="extensions.mailminer.qwerly.cps" type="int"/>
+    </preferences>
+
+    <vbox>
+      <label accesskey="&qwerly.key.accesskey;" control="qwerly_key.textbox">&qwerly.key.label;</label><textbox id="qwerly_key.textbox" preference="qwerly.key"/>
+      <label accesskey="&qwerly.cps.accesskey;" control="qwerly_cps.textbox">&qwerly.cps.label;</label><textbox disabled="true" id="qwerly_cps.textbox" preference="qwerly.cps"/>
+    </vbox>
+  </prefpane>
+
+</prefwindow>
