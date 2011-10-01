@@ -9,10 +9,6 @@ Components.utils.import("resource://mailminer/utils.js");
 
 // main
 var mailminer = {
-  testEmail: function() {
-    this.msgAdded({ author: "Daniel Tralamazza <tralamazza@gmail.com>" });
-  },
-
   // [EVENT] new email
   msgAdded: function(aMsgHdr) {
     // 1. extract the email from aMsgHdr (https://developer.mozilla.org/en/NsIMsgDBHdr)
@@ -64,8 +60,6 @@ var mailminer = {
     // https://developer.mozilla.org/en/Extensions/Thunderbird/HowTos/Common_Thunderbird_Use_Cases/Open_Folder#Watch_for_New_Mail
     var notificationService = Components.classes["@mozilla.org/messenger/msgnotificationservice;1"].getService(Components.interfaces.nsIMsgFolderNotificationService);
     notificationService.addListener(this, notificationService.msgAdded);
-
-    this.testEmail();
   },
 };
 
