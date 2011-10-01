@@ -41,7 +41,7 @@
 
     <vbox>
       <label accesskey="&qwerly.key.accesskey;" control="qwerly_key.textbox">&qwerly.key.label;</label><textbox id="qwerly_key.textbox" preference="qwerly.key"/>
-      <label accesskey="&qwerly.cps.accesskey;" control="qwerly_cps.textbox">&qwerly.cps.label;</label><textbox disabled="true" id="qwerly_cps.textbox" preference="qwerly.cps"/>
+      <label accesskey="&qwerly.cps.accesskey;" control="qwerly_cps.textbox">&qwerly.cps.label;</label><textbox disabled="true" id="qwerly_cps.textbox" preference="qwerly.cps" type="number" min="1"/>
     </vbox>
   </prefpane>
 
