@@ -9,6 +9,7 @@ Components.utils.import("resource://mailminer/utils.js");
 
 // main
 var mailminer = {
+
   // [EVENT] new email
   msgAdded: function(aMsgHdr) {
     // 1. extract the email from aMsgHdr (https://developer.mozilla.org/en/NsIMsgDBHdr)
@@ -19,12 +20,18 @@ var mailminer = {
     }
 
     // 2. search this email in our address book (https://developer.mozilla.org/En/Address_Book_Examples)
-    let ab = addrbook.addressBookForURI(this.prefs.getCharPref("addressBook")); // address book
+    let ab_URI = this.prefs.getCharPref("addressBook");
+    if (ab_URI == "") { // address book not found, user might have deleted (who knows)
+      ab_URI = addressBook.defaultAddressBook().URI; // get the default
+      this.prefs.setCharPref("addressBook", ab_URI); // set the preference
+    }
+    let ab = addrbook.addressBookForURI(ab_URI); // address book
     let card = ab.cardForEmailAddress(email); // search address card by email
     if (card == null) {
       if (this.prefs.getBoolPref("autoInsert")) {
         card = addrbook.createCard(email, ab); // add a new card
       } else {
+        utils.info("'" + email + "' not found");
         return; // RETURN! email not found and we don't auto add incoming mail
       }
     }
@@ -50,17 +57,22 @@ var mailminer = {
     });
   },
 
-  // Setup
+  // [EVENT] startup
   onLoad: function() {
     this.initialized = true;
 
     // load preferences (https://developer.mozilla.org/en/Adding_preferences_to_an_extension)
     this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.mailminer.");
 
+    if (this.prefs.getCharPref("rapleaf.key") == "")
+      utils.info("Missing Rapleaf key");
+    if (this.prefs.getCharPref("qwerly.key") == "")
+      utils.info("Missing Qwerly key");
+
     // https://developer.mozilla.org/en/Extensions/Thunderbird/HowTos/Common_Thunderbird_Use_Cases/Open_Folder#Watch_for_New_Mail
     var notificationService = Components.classes["@mozilla.org/messenger/msgnotificationservice;1"].getService(Components.interfaces.nsIMsgFolderNotificationService);
-    notificationService.addListener(this, notificationService.msgAdded);
-  },
+    notificationService.addListener(this, notificationService.msgAdded); // register event handler for incoming emails
+  }
 };
 
 window.addEventListener("load", function () { mailminer.onLoad(); }, false);
