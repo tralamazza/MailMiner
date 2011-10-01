@@ -22,5 +22,10 @@ var addrbook = {
         if (ab == null || ab == undefined)
             throw "Invalid address book: " + ab_URI;
         return ab;
+    },
+
+    // returns the default (first) address book
+    defaultAddressBook: function() {
+        return abManager.directories.getNext().QueryInterface(Components.interfaces.nsIAbDirectory);
     }
 };
