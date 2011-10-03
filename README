@@ -1,0 +1,12 @@
+Mail Miner
+
+AMO url: https://addons.mozilla.org/en-US/thunderbird/addon/mail-miner/
+
+
+TODO
+- Activity Manager
+- Manual query (popup menu entry over email address)
+- Search other web services
+- Throttle Qwerly calls
+- Implement a scheduler for Qwerly 202 status calls (wait 24h)
+- Add non basic Rapleaf fields
