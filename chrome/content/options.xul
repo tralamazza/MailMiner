@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://mailminer/locale/options.dtd">
-<prefwindow id="mailminer-preferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;">
+<prefwindow id="mailminer-preferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;" style="&prefWindow.style;">
   <script type="application/javascript" src="chrome://mailminer/content/options.js"/>
   
   <!-- GENERAL -->

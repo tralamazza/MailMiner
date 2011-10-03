@@ -1,4 +1,5 @@
 <!ENTITY prefwindow.title "Mail Miner preferences">
+<!ENTITY prefWindow.style "width: 38em;">
 
 <!ENTITY paneGeneral.title "General preferences">
 <!ENTITY overwriteFilled.label "Overwrite address book data">
