@@ -1,6 +1,9 @@
 /* Copyright (c) 2011 Daniel Tralamazza
    See the file LICENSE.txt for licensing information. */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+
 var EXPORTED_SYMBOLS = [ "hasher" ];
 
 function toHexString(charCode) {
@@ -8,7 +11,7 @@ function toHexString(charCode) {
 }
 
 // https://developer.mozilla.org/en/nsICryptoHash
-var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+var converter = Cc["@mozilla.org/intl/scriptableunicodeconverter"].createInstance(Ci.nsIScriptableUnicodeConverter);
 converter.charset = "UTF-8";
 
 var hasher = {
@@ -21,13 +24,13 @@ var hasher = {
     },
 
     md5: function(str) {
-        var ch = Components.classes["@mozilla.org/security/hash;1"].createInstance(Components.interfaces.nsICryptoHash);
+        var ch = Cc["@mozilla.org/security/hash;1"].createInstance(Ci.nsICryptoHash);
         ch.init(ch.MD5);
         return this._nsICSFromStr(str, ch);
     },
 
     sha1: function(str) {
-        var ch = Components.classes["@mozilla.org/security/hash;1"].createInstance(Components.interfaces.nsICryptoHash);
+        var ch = Cc["@mozilla.org/security/hash;1"].createInstance(Ci.nsICryptoHash);
         ch.init(ch.SHA1);
         return this._nsICSFromStr(str, ch);
     }

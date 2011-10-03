@@ -1,6 +1,9 @@
 /* Copyright (c) 2011 Daniel Tralamazza
    See the file LICENSE.txt for licensing information. */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+
 // load JSMs (https://developer.mozilla.org/en/Components.utils.import)
 Components.utils.import("resource://mailminer/rapleaf.js");
 Components.utils.import("resource://mailminer/qwerly.js");
@@ -20,15 +23,15 @@ var mailminer = {
     }
 
     // 2. search this email in our address book (https://developer.mozilla.org/En/Address_Book_Examples)
-    let ab_URI = this.prefs.getCharPref("addressBook");
+    let ab_URI = this._prefs.getCharPref("addressBook");
     if (ab_URI == "") { // address book not found, user might have deleted (who knows)
       ab_URI = addressBook.defaultAddressBook().URI; // get the default
-      this.prefs.setCharPref("addressBook", ab_URI); // set the preference
+      this._prefs.setCharPref("addressBook", ab_URI); // set the preference
     }
     let ab = addrbook.addressBookForURI(ab_URI); // address book
     let card = ab.cardForEmailAddress(email); // search address card by email
     if (card == null) {
-      if (this.prefs.getBoolPref("autoInsert")) {
+      if (this._prefs.getBoolPref("autoInsert")) {
         card = addrbook.createCard(email, ab); // add a new card
       } else {
         utils.info("'" + email + "' not found");
@@ -37,7 +40,7 @@ var mailminer = {
     }
 
     // 3a. query Rapleaf
-    rapleaf.queryByEmail(this.prefs.getCharPref("rapleaf.key"), email, function(rl_status, rl_text) {
+    rapleaf.queryByEmail(this._prefs.getCharPref("rapleaf.key"), email, function(rl_status, rl_text) {
       if (rl_status == 200) {
         rapleaf.updateABCard(JSON.parse(rl_text), card);
         ab.modifyCard(card);
@@ -47,7 +50,7 @@ var mailminer = {
     });
 
     // 3b. query Qwerly
-    qwerly.queryByEmail(this.prefs.getCharPref("qwerly.key"), email, function(qw_status, qw_text) {
+    qwerly.queryByEmail(this._prefs.getCharPref("qwerly.key"), email, function(qw_status, qw_text) {
       if (qw_status == 200) {
         qwerly.updateABCard(JSON.parse(qw_text), card);
         ab.modifyCard(card);
@@ -59,18 +62,16 @@ var mailminer = {
 
   // [EVENT] startup
   onLoad: function() {
-    this.initialized = true;
-
     // load preferences (https://developer.mozilla.org/en/Adding_preferences_to_an_extension)
-    this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.mailminer.");
+    this._prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsI_prefservice).getBranch("extensions.mailminer.");
 
-    if (this.prefs.getCharPref("rapleaf.key") == "")
+    if (this._prefs.getCharPref("rapleaf.key") == "")
       utils.info("Missing Rapleaf key");
-    if (this.prefs.getCharPref("qwerly.key") == "")
+    if (this._prefs.getCharPref("qwerly.key") == "")
       utils.info("Missing Qwerly key");
 
     // https://developer.mozilla.org/en/Extensions/Thunderbird/HowTos/Common_Thunderbird_Use_Cases/Open_Folder#Watch_for_New_Mail
-    var notificationService = Components.classes["@mozilla.org/messenger/msgnotificationservice;1"].getService(Components.interfaces.nsIMsgFolderNotificationService);
+    var notificationService = Cc["@mozilla.org/messenger/msgnotificationservice;1"].getService(Ci.nsIMsgFolderNotificationService);
     notificationService.addListener(this, notificationService.msgAdded); // register event handler for incoming emails
   }
 };

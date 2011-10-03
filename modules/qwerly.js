@@ -1,12 +1,15 @@
 /* Copyright (c) 2011 Daniel Tralamazza
    See the file LICENSE.txt for licensing information. */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+
 var EXPORTED_SYMBOLS = [ "qwerly" ];
 
 var qwerly = {
     queryByEmail: function(api_key, email, cb) {
         // https://developer.mozilla.org/En/XMLHttpRequest/Using_XMLHttpRequest#Using_XMLHttpRequest_from_JavaScript_modules_.2F_XPCOM.C2.A0components
-        var xhr = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Components.interfaces.nsIXMLHttpRequest); 
+        var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest); 
         var path = "/v1/email/" + encodeURIComponent(email) + "?api_key=" + api_key;
         xhr.open('GET', 'http://api.qwerly.com' + path, true); // async
         xhr.onreadystatechange = function(aEvt) {
