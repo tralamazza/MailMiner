@@ -63,7 +63,7 @@ var mailminer = {
   // [EVENT] startup
   onLoad: function() {
     // load preferences (https://developer.mozilla.org/en/Adding_preferences_to_an_extension)
-    this._prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsI_prefservice).getBranch("extensions.mailminer.");
+    this._prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService).getBranch("extensions.mailminer.");
 
     if (this._prefs.getCharPref("rapleaf.key") == "")
       utils.info("Missing Rapleaf key");
