@@ -45,4 +45,17 @@
     </vbox>
   </prefpane>
 
+  <!-- FLIPTOP -->
+  <prefpane id="paneFliptop" label="&paneFliptop.title;" image="chrome://mailminer/skin/fliptop.png">
+    <preferences>
+      <preference id="fliptop.key" name="extensions.mailminer.fliptop.key" type="string"/>
+      <preference id="fliptop.cps" name="extensions.mailminer.fliptop.cps" type="int"/>
+    </preferences>
+
+    <vbox>
+      <label accesskey="&fliptop.key.accesskey;" control="fliptop_key.textbox">&fliptop.key.label;</label><textbox id="fliptop_key.textbox" preference="fliptop.key"/>
+      <label accesskey="&fliptop.cps.accesskey;" control="fliptop_cps.textbox">&fliptop.cps.label;</label><textbox disabled="true" id="fliptop_cps.textbox" preference="fliptop.cps" type="number" min="1"/>
+    </vbox>
+  </prefpane>
+
 </prefwindow>

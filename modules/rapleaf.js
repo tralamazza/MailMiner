@@ -9,6 +9,10 @@ var EXPORTED_SYMBOLS = [ "rapleaf" ];
 Components.utils.import("resource://mailminer/hasher.js");
 
 var rapleaf = {
+    name: "Rapleaf",
+
+    keyName: "rapleaf.key",
+
     queryByEmail: function(api_key, email, cb) {
         // https://developer.mozilla.org/En/XMLHttpRequest/Using_XMLHttpRequest#Using_XMLHttpRequest_from_JavaScript_modules_.2F_XPCOM.C2.A0components
         var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest); 

@@ -1,23 +1,23 @@
 /* Copyright (c) 2011 Daniel Tralamazza
    See the file LICENSE.txt for licensing information. */
 
+// Fliptop acquired Qwerly
+
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 
-// TODO: deprecate
+var EXPORTED_SYMBOLS = [ "fliptop" ];
 
-var EXPORTED_SYMBOLS = [ "qwerly" ];
+var fliptop = {
+    name: "Fliptop",
 
-var qwerly = {
-    name: "Qwerly",
-
-    keyName: "qwerly.key",
+    keyName: "fliptop.key",
 
     queryByEmail: function(api_key, email, cb) {
         // https://developer.mozilla.org/En/XMLHttpRequest/Using_XMLHttpRequest#Using_XMLHttpRequest_from_JavaScript_modules_.2F_XPCOM.C2.A0components
         var xhr = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest); 
-        var path = "/v1/email/" + encodeURIComponent(email) + "?api_key=" + api_key;
-        xhr.open('GET', 'http://api.qwerly.com' + path, true); // async
+        var path = "/beta/person?email=" + encodeURIComponent(email) + "?api_key=" + api_key;
+        xhr.open('GET', 'http://api.fliptop.com' + path, true); // async
         xhr.onreadystatechange = function(aEvt) {
             if (xhr.readyState == 4)
                 cb(xhr.status, xhr.responseText);

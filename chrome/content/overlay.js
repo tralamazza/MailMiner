@@ -4,12 +4,6 @@
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 
-// load JSMs (https://developer.mozilla.org/en/Components.utils.import)
-Components.utils.import("resource://mailminer/rapleaf.js");
-Components.utils.import("resource://mailminer/qwerly.js");
-Components.utils.import("resource://mailminer/addrbook.js");
-Components.utils.import("resource://mailminer/utils.js");
-
 // main
 var mailminer = {
 
@@ -39,36 +33,39 @@ var mailminer = {
       }
     }
 
-    // 3a. query Rapleaf
-    rapleaf.queryByEmail(this._prefs.getCharPref("rapleaf.key"), email, function(rl_status, rl_text) {
-      if (rl_status == 200) {
-        rapleaf.updateABCard(JSON.parse(rl_text), card);
-        ab.modifyCard(card);
-      } else {
-        utils.error("|rapleaf| " + rl_text); // log rapleaf error
-      }
-    });
-
-    // 3b. query Qwerly
-    qwerly.queryByEmail(this._prefs.getCharPref("qwerly.key"), email, function(qw_status, qw_text) {
-      if (qw_status == 200) {
-        qwerly.updateABCard(JSON.parse(qw_text), card);
-        ab.modifyCard(card);
-      } else {
-        utils.error("|qwerly| " + qw_text); // log qwerly error
-      }
-    });
+    // 3. query the APIs
+    for (var i = 0; i < this._apis.length; i++) {
+      var api = this._apis[i]
+      api.queryByEmail(this._prefs.getCharPref(api.keyName), email, function(rl_status, rl_text) {
+        if (rl_status == 200) {
+          api.updateABCard(JSON.parse(rl_text), card);
+          ab.modifyCard(card);
+        } else {
+          utils.error("|" + api.name + "| " + rl_text); // log error
+        }
+      });
+    }
   },
 
   // [EVENT] startup
   onLoad: function() {
+    // load JSMs (https://developer.mozilla.org/en/Components.utils.import)
+    Components.utils.import("resource://mailminer/rapleaf.js");
+    Components.utils.import("resource://mailminer/qwerly.js");
+    Components.utils.import("resource://mailminer/fliptop.js");
+    Components.utils.import("resource://mailminer/addrbook.js");
+    Components.utils.import("resource://mailminer/utils.js");
+
     // load preferences (https://developer.mozilla.org/en/Adding_preferences_to_an_extension)
     this._prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService).getBranch("extensions.mailminer.");
 
-    if (this._prefs.getCharPref("rapleaf.key") == "")
-      utils.info("Missing Rapleaf key");
-    if (this._prefs.getCharPref("qwerly.key") == "")
-      utils.info("Missing Qwerly key");
+    // "register" our APIS
+    this._apis = [rapleaf, qwerly, fliptop]
+    for (var i = 0; i < this._apis.length; i++) {
+      var api = this._apis[i]
+      if (this._prefs.getCharPref(api.keyName) == "")
+        utils.info("Missing " + api.name + " key");
+    }
 
     // https://developer.mozilla.org/en/Extensions/Thunderbird/HowTos/Common_Thunderbird_Use_Cases/Open_Folder#Watch_for_New_Mail
     var notificationService = Cc["@mozilla.org/messenger/msgnotificationservice;1"].getService(Ci.nsIMsgFolderNotificationService);

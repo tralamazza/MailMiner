@@ -19,6 +19,12 @@ pref("extensions.mailminer.qwerly.key", "");
 // queries per second
 pref("extensions.mailminer.qwerly.cps", 2);
 
+// [Fliptop]
+// API key
+pref("extensions.mailminer.fliptop.key", "");
+// queries per second
+pref("extensions.mailminer.fliptop.cps", 2);
+
 
 // https://developer.mozilla.org/en/Localizing_extension_descriptions
 pref("extensions.mailminer@tralamazza.description", "chrome://mailminer/locale/overlay.properties");

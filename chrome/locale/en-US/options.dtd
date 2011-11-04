@@ -16,3 +16,9 @@
 <!ENTITY qwerly.key.accesskey "Q">
 <!ENTITY qwerly.cps.label "Qwerly calls per second">
 <!ENTITY qwerly.cps.accesskey "C">
+
+<!ENTITY paneFliptop.title "Fliptop preferences">
+<!ENTITY fliptop.key.label "Fliptop API key">
+<!ENTITY fliptop.key.accesskey "F">
+<!ENTITY fliptop.cps.label "Fliptop calls per second">
+<!ENTITY fliptop.cps.accesskey "C">

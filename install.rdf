@@ -4,17 +4,17 @@
     <em:id>mailminer@tralamazza</em:id>
     <em:type>2</em:type>
     <em:name>Mail Miner</em:name>
-    <em:version>0.1.2</em:version>
+    <em:version>0.1.3</em:version>
     <em:creator>Daniel Tralamazza</em:creator>
     <em:homepageURL>https://github.com/tralamazza/MailMiner</em:homepageURL>
     <em:contributor></em:contributor>
-    <em:description>Auto updates your address book using email web services like Rapleaf and Qwerly.</em:description>
+    <em:description>Auto updates your address book using email web services like Rapleaf and Qwerly (now Fliptop).</em:description>
     <em:optionsURL>chrome://mailminer/content/options.xul</em:optionsURL>
     <em:targetApplication>
       <Description>
         <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id> <!-- Thunderbird -->
         <em:minVersion>3.1</em:minVersion>
-        <em:maxVersion>8.*</em:maxVersion>
+        <em:maxVersion>9.*</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
